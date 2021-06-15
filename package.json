@@ -1,0 +1,11 @@
+{
+  "name": "dataFormat-practice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/dgujs/dataFormat-practice.git",
+  "author": "jinsoo <admin@binary01.me>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+}
+}
