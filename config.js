@@ -6,13 +6,16 @@ dotenv.config()
 const info = {
   accessKeyId: process.env.ID,
   secrestAccessKey: process.env.SECRET,
+  region: process.env.REGION
 }
 
-const params = {
+const ListParams = {
   Bucket: process.env.BUCKET_NAME,
-  CreateBucketConfiguration: {
-    LocationConstraint: process.env.REGION
-  }
+  Prefix: process.env.LOCATION
 }
-console.log(info, params);
-// const s3 = new AWS.S3({apiVersion: '2006-03-01'});
+
+const s3 = new AWS.S3(info);
+
+export default s3;
+
+export {ListParams};
