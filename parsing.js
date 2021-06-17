@@ -23,9 +23,9 @@ const getObject = async (key) => {
 const getAllObject = async (list) => {
   let parsedList = [];
   for (let key of list) {
-    const line = await getObject(key);
+    const parsedObj = await getObject(key);
     console.log(key);
-    parsedList.push(line);
+    parsedList.push(parsedObj);
   }
   return parsedList;
 };
