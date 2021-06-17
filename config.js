@@ -10,7 +10,7 @@ const info = {
 };
 
 const ListParams = {
-  Bucket: process.env.BUCKET_NAME,
+  Bucket: process.env.BUCKET_NAME_SOURCE,
   Prefix: process.env.LOCATION,
 };
 

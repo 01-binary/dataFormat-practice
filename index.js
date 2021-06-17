@@ -1,28 +1,18 @@
-import s3, { ListParams } from "./config.js";
-import { getFilteredFileList, makeFile, getFile, parsingToArr } from "./util.js";
-import {getAllObject, getObject} from "./parsing.js"
-const FILE_DIR = './test.txt';
-// let lists = [];
+import {
+  getFile,
+  parsingToArr,
+} from "./util.js";
+import { getAllObject } from "./parsing.js";
+import { makeCsv, uploadToS3 } from "./upload.js";
 
-// let loopParams = { ...ListParams };
-
-// let isNotEnd = false;
-
-// do {
-//   let data = await s3.listObjectsV2(loopParams).promise();
-//   let contents = data.Contents;
-//   isNotEnd = data.IsTruncated;
-//   const filteredContent = getFilteredFileList(contents);
-//   const filteredKeyList = filteredContent.map((obj) => obj.Key);
-
-//   lists = lists.concat(filteredKeyList);
-//   loopParams = Object.assign({}, ListParams, {
-//     ContinuationToken: data.NextContinuationToken,
-//   });
-// } while (isNotEnd);
-
-// makeFile(lists, 'test.txt');
+import { makeTargetList, FILE_DIR } from "./makeList.js";
+// await makeTargetList();
 
 const obj = await getFile(FILE_DIR);
-const objArr= parsingToArr(obj);
-getAllObject(objArr);
+const objArr = parsingToArr(obj);
+const parsedResults = await getAllObject(objArr);
+parsedResults.map((obj) => {
+  console.log(obj.key);
+  const content = makeCsv(obj.result);
+  uploadToS3(obj.key, content);
+});

@@ -2,7 +2,7 @@ import s3 from "./config.js";
 
 const getObject = async (key) => {
   const getParams = {
-    Bucket: process.env.BUCKET_NAME,
+    Bucket: process.env.BUCKET_NAME_SOURCE,
     Key: key,
   };
 
@@ -12,13 +12,22 @@ const getObject = async (key) => {
 
   ///이후 할 것들 < 만나면 >까지 지우기, \r 삭제,  { 만나면 } 삭제
   result = deleteUnusedThings(result).filter(line => line);
-  console.log(result, key);
+  //list in list for csv
+  result = result.map(line => [line]);
+  return {
+    key,
+    result
+  }
 };
 
 const getAllObject = async (list) => {
+  let parsedList = [];
   for (let key of list) {
-    await getObject(key);
+    const line = await getObject(key);
+    console.log(key);
+    parsedList.push(line);
   }
+  return parsedList;
 };
 
 const parsingByVerticalBar = (arr) => {
@@ -51,6 +60,8 @@ const deleteUnusedThings = (arr) => {
     }
     newLine = newLine.replaceAll("&nbsp;", "");
     newLine = newLine.replace(/ +/g, " ");
+    newLine = newLine.replace(",", "");
+
     if(newLine.replace(blankPattern, '') === '') return null;
     return newLine;
   });
@@ -58,13 +69,4 @@ const deleteUnusedThings = (arr) => {
   return parsedResult;
 };
 
-const checkKor = (str) => {
-  const regExp = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/;
-  if (regExp.test(str)) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-export { getAllObject, getObject };
+export { getAllObject };

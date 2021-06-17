@@ -1,1 +1,0 @@
-["6c7b90f7-6cf1-427d-9cb5-fad9194ddc2a/description/2020/04/18/EST_KOR_ABSTRACT.sql","6c7b90f7-6cf1-427d-9cb5-fad9194ddc2a/description/2020/04/19/EST_KOR_ABSTRACT.sql","6c7b90f7-6cf1-427d-9cb5-fad9194ddc2a/description/2020/04/20/EST_KOR_ABSTRACT.sql","6c7b90f7-6cf1-427d-9cb5-fad9194ddc2a/description/2020/05/28/EST_KOR_ABSTRACT.sql"]
